@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Backend.Processor\Backend.Processor.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	<Content Include="..\Backend.ML\**" Exclude="..\Backend.ML\**\*.pyproj" CopyToOutputDirectory="Always" TargetPath="ML\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>

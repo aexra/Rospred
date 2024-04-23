@@ -18,3 +18,5 @@ D:\useless\projects\Rospred\Backend\Backend.Testing\bin\Debug\net8.0\Backend.Pro
 D:\useless\projects\Rospred\Backend\Backend.Testing\obj\Debug\net8.0\Backend.Testing.csproj.AssemblyReference.cache
 D:\useless\projects\Rospred\Backend\Backend.Testing\obj\Debug\net8.0\Backend..3A5DFA02.Up2Date
 D:\useless\projects\Rospred\Backend\Backend.Testing\bin\Debug\net8.0\sample.py
+D:\useless\projects\Rospred\Backend\Backend.Testing\bin\Debug\net8.0\ML\Testing\Test.py
+D:\useless\projects\Rospred\Backend\Backend.Testing\bin\Debug\net8.0\ML\Utils\utils.py
