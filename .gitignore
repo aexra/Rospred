@@ -1,3 +1,9 @@
 Backend/.vs
 Backend/Backend.Web/bin
 Backend/Backend.Web/obj
+Backend/Backend.ML/bin
+Backend/Backend.ML/obj
+Backend/Backend.Processor/bin
+Backend/Backend.Processor/obj
+Backend/Backend.Testing/bin
+Backend/Backend.Testing/obj
