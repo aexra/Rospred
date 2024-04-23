@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Backend.Testing/1.0.0": {
+        "dependencies": {
+          "Backend.Processor": "1.0.0"
+        },
+        "runtime": {
+          "Backend.Testing.dll": {}
+        }
+      },
+      "Backend.Processor/1.0.0": {
+        "runtime": {
+          "Backend.Processor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Backend.Testing/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Backend.Processor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
