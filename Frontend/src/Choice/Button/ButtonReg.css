@@ -1,0 +1,19 @@
+.userreg{
+    margin-right: 4px;
+    max-width: 10%;
+}
+.buttonreg {
+    align-items: center;
+  color: #d2d2d1;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 8px;
+  transition: color .3s ease;
+  background-color: transparent;
+  border: none;
+  margin-left: 47%;
+  }
+
+  .buttonreg:hover{
+    color: #000;
+  }

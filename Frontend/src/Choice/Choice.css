@@ -1,0 +1,36 @@
+.backimg{
+    top: 1px;
+    left: 1px;
+    z-index: -1;
+    position: relative;
+}
+
+.text_ai{
+position: absolute;
+width: 661px;
+height: 301px;
+left: 5%;
+top: 38%;
+
+font-family: 'Montserrat', sans-serif;
+font-style: bold;
+font-weight: 700;
+font-size: 52px;
+line-height: 63px;
+z-index: 5;
+color: #000000;
+}
+
+.podtext{
+    position: absolute;
+    width: 661px;
+    height: 301px;
+    left: 5%;
+    top: 63%;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    line-height: 63px;
+    z-index: 9;
+
+}
