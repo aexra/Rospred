@@ -58,4 +58,7 @@ Console.WriteLine(IOProcess.Run("python ../Backend.ML/Testing/test.py Hello, web
 ```
 
 ### ML
+
+Большая часть работы с ML была проведена в Google.Colab, выгруженные оттуда ноутбуки можно просмотреть [здесь](Backend/Backend.ML/Jupyther)
+
 [Код](Backend/Backend.ML)
