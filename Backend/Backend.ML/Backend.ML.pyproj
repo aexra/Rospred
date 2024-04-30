@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Backend.ML</Name>
     <RootNamespace>Backend.ML</RootNamespace>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,10 +22,17 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Scripts\normalizer.py" />
+    <Compile Include="Scripts\predict.py" />
     <Compile Include="Testing\test.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Scripts\" />
     <Folder Include="Testing\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\trained_models.pkl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
