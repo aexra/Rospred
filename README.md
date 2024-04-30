@@ -2,6 +2,7 @@
 
 ### Наши направления
 - [Backend](#Backend)
+- [Frontend](#Frontend)
 
 ## Backend
 
@@ -62,3 +63,10 @@ Console.WriteLine(IOProcess.Run("python ../Backend.ML/Testing/test.py Hello, web
 Большая часть работы с ML была проведена в Google.Colab, выгруженные оттуда ноутбуки можно просмотреть [здесь](Backend/Backend.ML/Jupyther)
 
 [Код](Backend/Backend.ML)
+
+
+## Frontend
+
+### Дизайн
+
+![Landing (3)](https://github.com/aexra/Rospred/assets/121866384/b1bc29f2-3f9f-471f-891a-619c9abe1ee7)
