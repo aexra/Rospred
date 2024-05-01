@@ -58,6 +58,26 @@ using Backend.Processor;
 Console.WriteLine(IOProcess.Run("python ../Backend.ML/Testing/test.py Hello, web!").Output);
 ```
 
+Скрипт python используемый для получения прогноза на обученных моделях
+```py
+import sys
+import pickle
+import normalizer
+
+args = sys.argv[1:]
+
+prediction_name = args[0]
+prediction_horizon = int(args[1])
+
+with open('models/trained_models.pkl', 'rb') as f:
+  models = pickle.load(f)
+  model = models[prediction_name]
+  forecast = model.forecast(steps=prediction_horizon)
+  forecasted_values = forecast.values.tolist()
+  denormalized = normalizer.denormalize(forecasted_values)
+  print(denormalized)
+```
+
 ### ML
 
 Большая часть работы с ML была проведена в Google.Colab, выгруженные оттуда ноутбуки можно просмотреть [здесь](Backend/Backend.ML/Jupyther)
