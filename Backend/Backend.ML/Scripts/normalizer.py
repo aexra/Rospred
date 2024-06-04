@@ -1,5 +1,7 @@
 from pandas import DataFrame
 from sklearn.preprocessing import MinMaxScaler
+from joblib import load
+import numpy as np
 
 def normalize(df: DataFrame) -> (DataFrame, MinMaxScaler):
   scaler = MinMaxScaler()
@@ -8,15 +10,10 @@ def normalize(df: DataFrame) -> (DataFrame, MinMaxScaler):
   df_normalized[numeric_columns] = scaler.fit_transform(df[numeric_columns])
   return (df_normalized, scaler)
 
-def denormalize(forecasted_values):
-    denormalized = {}
-    for model, columns in forecasted_values.items():
-        denormalized[model] = {}
-        frame = DataFrame.from_dict(columns)
-        for row in frame.iterrows():
-            derow = scaler.inverse_transform(DataFrame([row[1]]))
-            for i, name in enumerate(row[1].index):
-                if not name in denormalized[model].keys():
-                    denormalized[model][name] = []
-                denormalized[model][name].append(derow[0][i])
-    return denormalized
+def denormalize(label_i: int, forecasted_values: list[float], ncolumns: int):
+    scaler = load('../Backend.ML/Models/scaler.pkl')
+    n_samples = len(forecasted_values)
+    dummy_values = np.zeros((n_samples, ncolumns))
+    dummy_values[:, label_i] = forecasted_values
+    denormalized = scaler.inverse_transform(dummy_values)
+    return denormalized[:, label_i]

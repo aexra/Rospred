@@ -17,7 +17,7 @@ public class MachineLearningController : ControllerBase
     [Route("{sdgid}&{tableid}")]
     public async Task<IActionResult> PredictTable([FromRoute] int sdgid, [FromRoute] int tableid)
     {
-        var result = IOProcess.Run("python ../Backend.ML/Testing/test.py Hello, web!").Output;
+        var result = IOProcess.Run("python ../Backend.ML/Scripts/predict.py Total population arima 10").Output;
 
         return Ok(result);
     }
