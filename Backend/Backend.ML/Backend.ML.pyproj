@@ -32,7 +32,10 @@
     <Folder Include="Testing\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\trained_models.pkl" />
+    <Content Include="Models\scaler.pkl" />
+    <Content Include="Models\trained_arch_models.pkl" />
+    <Content Include="Models\trained_arima_models.pkl" />
+    <Content Include="Models\trained_garch_models.pkl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
