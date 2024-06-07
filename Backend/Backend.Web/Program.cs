@@ -46,6 +46,7 @@ DataContext.AppRoles.Add(new() { Name="User", NormalizedName="USER" });
 DataContext.AppRoles.Add(new() { Name="Admin", NormalizedName="ADMIN" });
 
 builder.Services.AddDbContext<DataContext>();
+builder.Services.AddDbContext<SDGDBContext>();
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.User.RequireUniqueEmail = true;
