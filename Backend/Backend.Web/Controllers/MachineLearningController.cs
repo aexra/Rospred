@@ -14,11 +14,10 @@ public class MachineLearningController : ControllerBase
     public MachineLearningController() { }
 
     [HttpGet]
-    [Route("{sdgid}&{tableid}")]
-    public async Task<IActionResult> PredictTable([FromRoute] int sdgid, [FromRoute] int tableid)
+    [Route("{label}&{model}&{horizon}")]
+    public async Task<IActionResult> PredictTable([FromRoute] string label, [FromRoute] string model, [FromRoute] int horizon)
     {
-        var result = IOProcess.Run("python ../Backend.ML/Scripts/predict.py Total population arima 10").Output;
-
+        var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {label} {model} {horizon}").Output;
         return Ok(result);
     }
 }
