@@ -15,7 +15,7 @@
 
 Вот некоторые запросы к серверу
 
-![image](https://github.com/aexra/Rospred/assets/121866384/488bff53-be34-4bf7-95d9-18d373ca03f7)
+![image](https://github.com/aexra/Rospred/assets/121866384/457e3be2-cc36-4c69-9369-14675511af31)
 
 ### Python processor
 [Код](Backend/Backend.Processor)
@@ -66,15 +66,16 @@ import normalizer
 
 args = sys.argv[1:]
 
-prediction_name = args[0]
-prediction_horizon = int(args[1])
+label = " ".join(args[:-2])
+model_name = args[-2]
+prediction_horizon = int(args[-1])
 
-with open('models/trained_models.pkl', 'rb') as f:
+with open(f'../Backend.ML/Models/trained_{model_name}_models.pkl', 'rb') as f:
   models = pickle.load(f)
-  model = models[prediction_name]
+  model = models[label]
   forecast = model.forecast(steps=prediction_horizon)
   forecasted_values = forecast.values.tolist()
-  denormalized = normalizer.denormalize(forecasted_values)
+  denormalized = normalizer.denormalize(labels.index(label), forecasted_values, 331)
   print(denormalized)
 ```
 
@@ -89,4 +90,8 @@ with open('models/trained_models.pkl', 'rb') as f:
 
 ### Дизайн
 
-![Landing (3)](https://github.com/aexra/Rospred/assets/121866384/b1bc29f2-3f9f-471f-891a-619c9abe1ee7)
+![Landing - Administrator](https://github.com/aexra/Rospred/assets/121866384/059f87f3-02f4-4873-8b80-3da76e75868c)
+
+![ЦУРы - Administrator](https://github.com/aexra/Rospred/assets/121866384/98e693a8-a6f4-44f8-bbfe-c3f5549cd73a)
+
+![Control Panel - Administrator](https://github.com/aexra/Rospred/assets/121866384/40283549-53dd-4344-b0ec-b5dd35d813d7)
