@@ -17,6 +17,24 @@ namespace Backend.Web.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
+            modelBuilder.Entity("Backend.Web.Data.SDGTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SDG")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SDGTables");
+                });
+
             modelBuilder.Entity("Backend.Web.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -109,13 +127,13 @@ namespace Backend.Web.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f4997b56-c548-44c1-ac8d-485baa6ef9ae",
+                            Id = "a0bded50-0791-464a-986c-be381d2ee182",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "a30380d9-24f9-461d-8c67-920200219042",
+                            Id = "ec23e170-0009-46e1-a92d-f866c430abeb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

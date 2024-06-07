@@ -53,6 +53,20 @@ namespace Backend.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SDGTables",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SDG = table.Column<int>(type: "INTEGER", nullable: false),
+                    TableName = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SDGTables", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -163,8 +177,8 @@ namespace Backend.Web.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "a30380d9-24f9-461d-8c67-920200219042", null, "Admin", "ADMIN" },
-                    { "f4997b56-c548-44c1-ac8d-485baa6ef9ae", null, "User", "USER" }
+                    { "a0bded50-0791-464a-986c-be381d2ee182", null, "User", "USER" },
+                    { "ec23e170-0009-46e1-a92d-f866c430abeb", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -222,6 +236,9 @@ namespace Backend.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "SDGTables");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

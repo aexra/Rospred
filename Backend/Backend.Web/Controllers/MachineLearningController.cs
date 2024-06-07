@@ -14,7 +14,7 @@ public class MachineLearningController : ControllerBase
     public MachineLearningController() { }
 
     [HttpGet]
-    [Route("{label}&{model}&{horizon}")]
+    [Route("predict/{label}&{model}&{horizon}")]
     public async Task<IActionResult> PredictTable([FromRoute] string label, [FromRoute] string model, [FromRoute] int horizon)
     {
         var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {label} {model} {horizon}").Output;
