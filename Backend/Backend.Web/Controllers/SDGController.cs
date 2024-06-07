@@ -1,9 +1,6 @@
 ﻿using Backend.Web.Data;
-using Backend.Web.Dtos.Tables;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Web.Controllers;
 

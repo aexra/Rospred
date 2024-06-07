@@ -1,7 +1,5 @@
 ﻿using Backend.Web.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 
 namespace Backend.Web.Controllers;
 
@@ -18,6 +16,7 @@ public class SDGUtilityController : ControllerBase
 
 
     /// UTILITY
+
 
     // Получает таблицы указанной ЦУР
     [HttpGet("sdg-tables/{id}")]
