@@ -1,6 +1,7 @@
 ﻿using Backend.Web.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace Backend.Web.Controllers;
 
@@ -18,8 +19,8 @@ public class SDGUtilityController : ControllerBase
 
     /// UTILITY
 
-
-    [HttpGet("tables/{id}")]
+    // Получает таблицы указанной ЦУР
+    [HttpGet("sdg-tables/{id}")]
     public async Task<ActionResult<IEnumerable<SDGTable>>> GetSDGTables(int id)
     {
         var sdg = await _context.SDGs.FindAsync(id);
@@ -34,5 +35,123 @@ public class SDGUtilityController : ControllerBase
         var tables = _context.SDGTables.Where(t => tablesIds.Contains(t.Id));
 
         return Ok(tables);
+    }
+
+    // Получает значения указанной таблицы
+    [HttpGet("table-values/{id}")]
+    public async Task<ActionResult<IEnumerable<SDGTable>>> GetTableValues(int id)
+    {
+        var table = await _context.SDGTables.FindAsync(id);
+
+        if (table == null)
+        {
+            return NotFound();
+        }
+
+        var valuesIds = table.ValuesIds.Split(",").ToHashSet().Select(int.Parse);
+
+        var values = _context.SDGValues.Where(v => valuesIds.Contains(v.Id));
+
+        return Ok(values);
+    }
+
+    // Добавляет указатель на таблицу в ЦУРе
+    [HttpPut("sdg-tables/s={s}&t={t}")]
+    public async Task<ActionResult> AddTableReference(int s, int t)
+    {
+        var sdg = await _context.SDGs.FindAsync(s);
+
+        if (sdg == null)
+        {
+            return NotFound($"SDG {s} not found");
+        }
+
+        var table = await _context.SDGTables.FindAsync(t);
+
+        if (table == null)
+        {
+            return NotFound($"Table {t} not found");
+        }
+
+        var tablesIds = sdg.TableIds.Split(",").ToHashSet().Select(int.Parse).ToList();
+
+        tablesIds.Add(t);
+        sdg.TableIds = string.Join(",", tablesIds);
+        await _context.SaveChangesAsync();
+        return Ok($"Added table {t} to SDG {s} successfully");
+    }
+
+    // Удаляет указатель на таблицу в ЦУРе
+    [HttpDelete("sdg-tables/s={s}&t={t}")]
+    public async Task<ActionResult> RemoveTableReference(int s, int t)
+    {
+        var sdg = await _context.SDGs.FindAsync(s);
+
+        if (sdg == null)
+        {
+            return NotFound();
+        }
+
+        var tablesIds = sdg.TableIds.Split(",").ToHashSet().Select(int.Parse).ToList();
+
+        if (tablesIds.Contains(t))
+        {
+            tablesIds.Remove(t);
+            sdg.TableIds = string.Join(",", tablesIds);
+            await _context.SaveChangesAsync();
+            return Ok($"Removed table {t} from SDG {s} successfully");
+        }
+
+        return NotFound($"Table {t} not found in SDG {s}");
+    }
+
+    // Добавляет указатель на значение в таблице
+    [HttpPut("table-values/t={t}&v={v}")]
+    public async Task<ActionResult> AddValueReference(int t, int v)
+    {
+        var table = await _context.SDGTables.FindAsync(t);
+
+        if (table == null)
+        {
+            return NotFound($"Table {t} not found");
+        }
+
+        var value = await _context.SDGValues.FindAsync(v);
+
+        if (value == null)
+        {
+            return NotFound($"Value {v} not found");
+        }
+
+        var valuesIds = table.ValuesIds.Split(",").ToHashSet().Select(int.Parse).ToList();
+
+        valuesIds.Add(t);
+        table.ValuesIds = string.Join(",", valuesIds);
+        await _context.SaveChangesAsync();
+        return Ok($"Added value {v} to table {t} successfully");
+    }
+
+    // Удаляет указатель на значение в таблице
+    [HttpDelete("table-values/t={t}&v={v}")]
+    public async Task<ActionResult> RemoveValueReference(int t, int v)
+    {
+        var table = await _context.SDGTables.FindAsync(t);
+
+        if (table == null)
+        {
+            return NotFound();
+        }
+
+        var valuesIds = table.ValuesIds.Split(",").ToHashSet().Select(int.Parse).ToList();
+
+        if (valuesIds.Contains(v))
+        {
+            valuesIds.Remove(v);
+            table.ValuesIds = string.Join(",", valuesIds);
+            await _context.SaveChangesAsync();
+            return Ok($"Removed value {v} from table {t} successfully");
+        }
+
+        return NotFound($"Value {v} not found in table {t}");
     }
 }
