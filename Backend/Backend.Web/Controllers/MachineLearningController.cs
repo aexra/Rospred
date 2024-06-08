@@ -14,11 +14,18 @@ public class MachineLearningController : ControllerBase
     public MachineLearningController() { }
 
     [HttpGet]
-    [Route("predict/{label}&{model}&{horizon}")]
+    [Route("predict/l={label}&m={model}&h={horizon}")]
     public async Task<IActionResult> PredictTable([FromRoute] string label, [FromRoute] string model, [FromRoute] int horizon)
     {
         var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {label} {model} {horizon}").Output;
         return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("learn")]
+    public async Task<IActionResult> LearnModels()
+    {
+        return Ok();
     }
 }
 
