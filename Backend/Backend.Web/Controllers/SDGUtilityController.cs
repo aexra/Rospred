@@ -1,5 +1,6 @@
 ﻿using Backend.Web.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 
 namespace Backend.Web.Controllers;
 
@@ -29,11 +30,29 @@ public class SDGUtilityController : ControllerBase
             return NotFound();
         }
 
-        var tablesIds = sdg.TableIds.Split(",").ToHashSet().Select(int.Parse);
+        if (string.IsNullOrEmpty(sdg.TableIds))
+        {
+            return NotFound($"No tables found for SDG {id} ({sdg.Name})");
+        }
 
-        var tables = _context.SDGTables.Where(t => tablesIds.Contains(t.Id));
-
-        return Ok(tables);
+        try
+        {
+            var splitted = sdg.TableIds.Split(",");
+            foreach (var tid in splitted)
+            {
+                if (!int.TryParse(tid, out var _))
+                {
+                    return StatusCode(500, "Fatal error parsing SDG tables references.");
+                }
+            }
+            var tablesIds = splitted.ToHashSet().Select(int.Parse);
+            var tables = _context.SDGTables.Where(t => tablesIds.Contains(t.Id));
+            return Ok(tables);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500);
+        }
     }
 
     // Получает значения указанной таблицы
@@ -47,11 +66,29 @@ public class SDGUtilityController : ControllerBase
             return NotFound();
         }
 
-        var valuesIds = table.ValuesIds.Split(",").ToHashSet().Select(int.Parse);
+        if (string.IsNullOrEmpty(table.ValuesIds))
+        {
+            return NotFound($"No values found for table {id} ({table.Name})");
+        }
 
-        var values = _context.SDGValues.Where(v => valuesIds.Contains(v.Id));
-
-        return Ok(values);
+        try
+        {
+            var splitted = table.ValuesIds.Split(",");
+            foreach (var tid in splitted)
+            {
+                if (!int.TryParse(tid, out var _))
+                {
+                    return StatusCode(500, "Fatal error parsing SDG tables references.");
+                }
+            }
+            var valuesIds = splitted.ToHashSet().Select(int.Parse);
+            var values = _context.SDGValues.Where(v => valuesIds.Contains(v.Id));
+            return Ok(values);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500);
+        }
     }
 
     // Добавляет указатель на таблицу в ЦУРе
