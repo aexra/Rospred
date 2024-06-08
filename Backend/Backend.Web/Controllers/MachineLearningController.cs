@@ -22,10 +22,10 @@ public class MachineLearningController : ControllerBase
     }
 
     [HttpGet]
-    [Route("predict/l={label}&m={model}&h={horizon}")]
-    public async Task<IActionResult> PredictTable([FromRoute] string label, [FromRoute] string model, [FromRoute] int horizon)
+    [Route("predict/v={vid}&m={model}&h={horizon}")]
+    public async Task<IActionResult> PredictTable([FromRoute] string vid, [FromRoute] string model, [FromRoute] int horizon)
     {
-        var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {label} {model} {horizon}").Output;
+        var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {vid} {model} {horizon}").Output;
         return Ok(result);
     }
 
