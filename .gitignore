@@ -1,6 +1,7 @@
 Backend/.vs
 Backend/Backend.Web/bin
 Backend/Backend.Web/obj
+Backend/Backend.Web/Database
 Backend/Backend.ML/bin
 Backend/Backend.ML/obj
 Backend/Backend.Processor/bin

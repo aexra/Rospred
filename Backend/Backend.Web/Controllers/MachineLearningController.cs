@@ -1,5 +1,8 @@
 ﻿using Backend.Processor;
+using Backend.Web.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Backend.Web.Controllers;
 
@@ -11,13 +14,30 @@ namespace Backend.Web.Controllers;
 [ApiController]
 public class MachineLearningController : ControllerBase
 {
-    public MachineLearningController() { }
+    private readonly SDGDBContext _context;
+
+    public MachineLearningController(SDGDBContext context) 
+    { 
+        _context = context;
+    }
 
     [HttpGet]
-    [Route("predict/{label}&{model}&{horizon}")]
-    public async Task<IActionResult> PredictTable([FromRoute] string label, [FromRoute] string model, [FromRoute] int horizon)
+    [Route("predict/v={vid}&m={model}&h={horizon}")]
+    public async Task<IActionResult> PredictTable([FromRoute] string vid, [FromRoute] string model, [FromRoute] int horizon)
     {
-        var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {label} {model} {horizon}").Output;
+        var result = IOProcess.Run($"python ../Backend.ML/Scripts/predict.py {vid} {model} {horizon}").Output;
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("learn")]
+    public async Task<IActionResult> LearnModels()
+    {
+        var columns = (await _context.SDGValues.ToListAsync()).Select(v => $"{v.Id}&{v.Values}");
+        var str = string.Join("|", columns);
+
+        var result = IOProcess.Run($"python ../Backend.ML/Scripts/learn.py \"{str}\"").Output;
+
         return Ok(result);
     }
 }
