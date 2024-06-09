@@ -27,8 +27,4 @@
 	<Content Include="..\Backend.ML\**" Exclude="..\Backend.ML\**\*.pyproj" CopyToOutputDirectory="Always" TargetPath="ML\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
